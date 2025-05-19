@@ -12,11 +12,11 @@ public enum EnumMain {
     DATE_PATTERN_STR("dd-MMM-yyyy"),
     HOLIDAY_REASON_REG_EX("(for){1}\\D+"),
     SATURDAY("Saturday"),
-    SUNDAY("Sunday");
+    SUNDAY("Sunday"),
+    LOCATION_REG_EX("\\s(in){1}\\s\\w+");
 
     private String value;
-    private Pattern datePattern;
-    private Pattern reasonPattern;
+    private Pattern pattern;
     private SimpleDateFormat sdf;
 
     EnumMain(String value) {
@@ -27,18 +27,11 @@ public enum EnumMain {
         return this.value;
     }
 
-    public Pattern datePattern() {
-        if (this.datePattern == null) {
-            datePattern = Pattern.compile(value());
+    public Pattern pattern() {
+        if (this.pattern == null) {
+            this.pattern = Pattern.compile(value());
         }
-        return datePattern;
-    }
-
-    public Pattern reasonPattern() {
-        if (this.reasonPattern == null) {
-            this.reasonPattern = Pattern.compile(value());
-        }
-        return this.reasonPattern;
+        return this.pattern;
     }
 
     public SimpleDateFormat sdf() {

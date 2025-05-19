@@ -28,8 +28,8 @@ public interface IMain {
     }
 
     static void extractHoliday(String content, Map<Date, Set<String>> holidayMap) {
-        Matcher matcher = DATE_REG_EX.datePattern().matcher(content);
-        Matcher reasonMatcher = HOLIDAY_REASON_REG_EX.reasonPattern().matcher(content);
+        Matcher matcher = DATE_REG_EX.pattern().matcher(content);
+        Matcher reasonMatcher = HOLIDAY_REASON_REG_EX.pattern().matcher(content);
         if (matcher.find() && reasonMatcher.find()) {
             String dateStr = matcher.group();
             String reasonStr = reasonMatcher.group();
