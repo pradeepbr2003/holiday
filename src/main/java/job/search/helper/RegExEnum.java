@@ -1,25 +1,19 @@
-package job.search;
+package job.search.helper;
 
 import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
 
-public enum EnumMain {
-    HOLIDAYS_LOG("holidays.log"),
-    MANDATORY_HOLIDAYS("Mandatory Holidays"),
-    FLOATING_HOLIDAYS("Floating Holidays"),
-    MANDATORY_HOLIDAY("Mandatory holiday"),
+public enum RegExEnum {
+    DATE_PATTERN("dd-MMM-yyyy"),
     DATE_REG_EX("\\d+-\\w{3}-\\d{4}"),
-    DATE_PATTERN_STR("dd-MMM-yyyy"),
     HOLIDAY_REASON_REG_EX("(for){1}\\D+"),
-    SATURDAY("Saturday"),
-    SUNDAY("Sunday"),
     LOCATION_REG_EX("\\s(in){1}\\s\\w+");
 
     private String value;
     private Pattern pattern;
     private SimpleDateFormat sdf;
 
-    EnumMain(String value) {
+    RegExEnum(String value) {
         this.value = value;
     }
 
@@ -34,7 +28,7 @@ public enum EnumMain {
         return this.pattern;
     }
 
-    public SimpleDateFormat sdf() {
+    public SimpleDateFormat formatter() {
         if (this.sdf == null) {
             this.sdf = new SimpleDateFormat(value());
         }
