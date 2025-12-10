@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.time.Month;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/holiday")
@@ -34,11 +33,9 @@ public class HolidayController {
 
     @GetMapping("/find/{leaveName}")
     public String findHoliday(@PathVariable String leaveName) throws Exception {
-        Optional<String> optHoliday = holidayList.stream().filter(str -> str.toUpperCase().contains(leaveName.toUpperCase())).findAny();
-        if (optHoliday.isPresent()) {
-            return optHoliday.get();
-        }
-        throw new RuntimeException("Leave not found");
+        return holidayList.stream()
+                .filter(str -> str.toUpperCase().contains(leaveName.toUpperCase())).findAny()
+                .orElseThrow(() -> new RuntimeException("Leave not found"));
     }
 
     //    @GetMapping("/find/{leaveName}")
