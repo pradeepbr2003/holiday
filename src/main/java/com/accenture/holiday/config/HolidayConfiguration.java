@@ -21,15 +21,13 @@ public class HolidayConfiguration {
      * @throws IOException when the resource cannot be read or is missing
      */
     @Bean
+    @SuppressWarnings("unused")
     public List<String> holidayList() throws IOException {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream(BANGALORE_HOLIDAYS_LOG.value())) {
             if (is == null) {
                 throw new FileNotFoundException("Accenture Holidays File not found in classpath");
             }
-            List<String> holidayList = new BufferedReader(new InputStreamReader(is))
-                    .lines()
-                    .toList();
-            return holidayList;
+            return new BufferedReader(new InputStreamReader(is)).lines().toList();
         }
     }
 }

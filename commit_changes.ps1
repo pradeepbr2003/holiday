@@ -2,7 +2,7 @@
 param(
     [string]$Message = "add java docs and update readme",
     [string]$Remote = "origin",
-    [string]$Branch = "main"
+    [string]$Branch = "local"
 )
 
 Write-Host "commit_changes.ps1 - starting" -ForegroundColor Cyan
