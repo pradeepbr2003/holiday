@@ -87,7 +87,7 @@ public class HolidayService {
     private Map<HolidayEnum, List<Map.Entry<Month, List<String>>>> monthGroupList(List<Map.Entry<Date, StringBuffer>> entryList, HolidayEnum he, int month) {
         Map<Month, List<String>> holidayMap = entryList.stream()
                 .filter(e -> holidayFilter.filterHolidays(e, he.value(), month))
-                .collect(Collectors.groupingBy(e -> Month.of(e.getKey().getMonth() + 1), Collectors.mapping(ee -> holidayUtil.holidayMessage(ee, MANDATORY_HOLIDAYS), Collectors.toList())));
+                .collect(Collectors.groupingBy(e -> Month.of(e.getKey().getMonth() + 1), Collectors.mapping(ee -> holidayUtil.holidayMessage(ee, he), Collectors.toList())));
         return Map.of(he, holidayMap.entrySet().stream().sorted(comparingByKey()).toList());
     }
 }

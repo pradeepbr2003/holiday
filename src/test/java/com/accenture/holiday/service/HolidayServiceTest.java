@@ -55,13 +55,11 @@ public class HolidayServiceTest {
         when(holidayUtil.extractDate(lines.get(0))).thenReturn(date(2024,1,1));
         when(holidayUtil.extractDate(lines.get(1))).thenReturn(date(2025,2,2));
 
-        // filter should return true for Mandatory, false for Floating
+        // filter should return true for Mandatory (only this is needed for the test)
         when(holidayFilter.filterHolidays(any(), eq(HolidayEnum.MANDATORY_HOLIDAYS.value()), eq(0))).thenReturn(true);
-        when(holidayFilter.filterHolidays(any(), eq(HolidayEnum.FLOATING_HOLIDAYS.value()), eq(0))).thenReturn(false);
 
-        // return messages
+        // return messages for mandatory entries
         when(holidayUtil.holidayMessage(any(), eq(HolidayEnum.MANDATORY_HOLIDAYS))).thenReturn("AlphaMsg");
-        when(holidayUtil.holidayMessage(any(), eq(HolidayEnum.FLOATING_HOLIDAYS))).thenReturn("BetaMsg");
 
         Map<HolidayEnum, List<Map.Entry<java.time.Month, List<String>>>> result = holidayService.holidays(lines, "Mandatory", 0);
         assertThat(result).containsKey(HolidayEnum.MANDATORY_HOLIDAYS);
